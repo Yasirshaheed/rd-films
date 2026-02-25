@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RD FILMS – Automotive Artistry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #030304;
+      --bg-soft: #07080b;
+      --accent: #f5c15c;
+      --accent-soft: rgba(245,193,92,0.12);
+      --text: #f5f5f7;
+      --muted: #8a8d96;
+      --border: rgba(255,255,255,0.06);
+      --danger: #ff3355;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --blur: 22px;
+      --shadow-soft: 0 28px 90px rgba(0,0,0,0.85);
+      --shadow-glow: 0 0 50px rgba(245,193,92,0.35);
+      --transition-fast: 220ms ease-out;
+      --transition-med: 420ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(245,193,92,0.08) 0, transparent 40%),
+        radial-gradient(circle at 90% 110%, rgba(255,51,85,0.1) 0, transparent 46%),
+        radial-gradient(circle at 50% 0%, #14151b 0, #030304 46%, #000000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    section {
+      position: relative;
+      padding: 72px 5vw;
+    }
+
+    @media (min-width: 1024px) {
+      section {
+        padding: 110px 10vw;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page-shell {
+      max-width: 1440px;
+      margin: 0 auto 80px;
+    }
+
+    /* ---------- HEADER / NAV ---------- */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(to bottom, rgba(3,3,4,0.96), rgba(3,3,4,0.84), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 5vw;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .brand-mark img {
+      width: 110%;
+      height: 110%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.75));
+      transform: translateZ(0);
+    }
+
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-title span:first-child {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .nav-title span:last-child {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 28px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--danger));
+      transition: width 220ms ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 5px 10px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: radial-gradient(circle at 0 0, #282836 0, #050509 50%, #020203 100%);
+    }
+
+    .nav-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: radial-gradient(circle, var(--accent) 0, #332209 90%);
+      box-shadow: 0 0 18px rgba(245,193,92,0.8);
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 8px 14px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, var(--accent), #ffc38f, var(--accent));
+      color: #131313;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .nav-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent 30%, transparent 70%, rgba(255,255,255,0.4));
+      mix-blend-mode: soft-light;
+      opacity: 0;
+      transform: translateX(-30%);
+      transition: opacity 260ms ease-out, transform 420ms ease-out;
+    }
+
+    .nav-btn:hover::after {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+
+    .nav-btn span {
+      font-weight: 600;
+    }
+
+    .nav-btn-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.82);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* mobile nav hint (no burger, just scroll) */
+    @media (max-width: 768px) {
+      .nav {
+        padding-inline: 4vw;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .nav-links {
+        display: flex;
+      }
+      .nav-pill {
+        display: flex;
+      }
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.4fr);
+      gap: 42px;
+      align-items: center;
+      padding-top: 52px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 40px;
+        gap: 32px;
+      }
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-pill);
+      padding: 3px 10px 3px 4px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.18), rgba(3,3,4,0.94));
+      box-shadow: 0 18px 60px rgba(0,0,0,0.85);
+      transform-origin: left;
+      animation: hero-fade-up 800ms ease-out 140ms both;
+    }
+
+    .hero-kicker-pill {
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .hero-kicker span {
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 7vw, 54px);
+      line-height: 1.02;
+      margin: 20px 0 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title span:nth-child(2) {
+      font-weight: 300;
+      opacity: 0.26;
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 26px;
+    }
+
+    .hero-sub strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      border-radius: var(--radius-pill);
+      padding: 11px 20px;
+      border: none;
+      background: linear-gradient(115deg, var(--accent), #ffdf9a, var(--accent));
+      color: #121212;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.45), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: 0;
+      transform: translate3d(-12%, -12%, 0);
+      transition: opacity 260ms ease-out;
+    }
+
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-secondary {
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(6,6,9,0.98);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .btn-secondary span {
+      width: 19px;
+      height: 19px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 0, #ffffff 0, #777 60%, #111 100%);
+      color: #000;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 10px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: translateY(-50%);
+      opacity: 0.8;
+    }
+
+    .hero-right {
+      position: relative;
+      min-height: 240px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 10% 0, rgba(255,255,255,0.06), rgba(0,0,0,1));
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      transform: translate3d(0, 40px, 0);
+      opacity: 0;
+      animation: hero-float-in 980ms var(--transition-med) 100ms forwards;
+    }
+
+    .hero-car-main {
+      position: relative;
+      border-radius: calc(var(--radius-lg) - 10px);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      isolation: isolate;
+      max-height: 420px;
+    }
+
+    .hero-car-main img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 1200ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .hero-card:hover .hero-car-main img {
+      transform: scale(1.08);
+    }
+
+    .hero-gradient-ring {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      top: -70px;
+      right: -40px;
+      background: radial-gradient(circle, rgba(245,193,92,0.22) 0, transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+
+    .hero-ring-inner {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.36);
+      inset: 0;
+      margin: auto;
+      animation: spin-slow 30s linear infinite;
+    }
+
+    .hero-ring-core {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 100px;
+      background: radial-gradient(circle, #ffffff 0, var(--accent) 40%, #271707 100%);
+      box-shadow: 0 0 40px rgba(245,193,92,0.9);
+    }
+
+    .hero-card-footer {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 2px 2px;
+    }
+
+    .hero-card-text {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-card-chip-row {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(4,4,6,0.93);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--danger) 0, #2b0207 100%);
+      box-shadow: 0 0 12px rgba(255,51,85,0.8);
+      flex-shrink: 0;
+    }
+
+    .chip-gold {
+      border-color: rgba(245,193,92,0.55);
+      background: linear-gradient(120deg, rgba(245,193,92,0.12), rgba(3,3,4,0.98));
+      color: #f7e3b2;
+    }
+
+    /* ---------- GALLERY STRIP ---------- */
+
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.08), #030304);
+      cursor: pointer;
+      transform: translate3d(0, 20px, 0);
+      opacity: 0;
+      animation: gallery-rise 800ms ease-out 260ms forwards;
+    }
+
+    .gallery-card:nth-child(2) { animation-delay: 360ms; }
+    .gallery-card:nth-child(3) { animation-delay: 460ms; }
+
+    .gallery-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1) contrast(1.15);
+      transform: scale(1.02);
+      transition: transform 900ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms ease-out, opacity 260ms ease-out;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.35) contrast(1.25);
+      opacity: 0.94;
+    }
+
+    .gallery-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.18), transparent 50%);
+      opacity: 0;
+      transition: opacity 260ms ease-out;
+      mix-blend-mode: soft-light;
+    }
+
+    .gallery-card:hover::after {
+      opacity: 1;
+    }
+
+    .gallery-label {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.86);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    @media (max-width: 700px) {
+      .gallery-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .gallery-card:nth-child(3) {
+        display: none;
+      }
+    }
+
+    /* ---------- SECTION TITLES ---------- */
+
+    .section-heading {
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      max-width: 520px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    /* ---------- FEATURES ---------- */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .feature-item {
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.1), rgba(4,4,8,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 120% 0, rgba(245,193,92,0.2), transparent 60%);
+      opacity: 0;
+      transition: opacity 260ms ease-out;
+    }
+
+    .feature-item:hover::before {
+      opacity: 1;
+    }
+
+    .feature-eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .feature-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .feature-tag-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .feature-tag {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--muted);
+      background: rgba(6,6,10,0.96);
+      white-space: nowrap;
+    }
+
+    .feature-media {
+      position: relative;
+    }
+
+    .feature-media-main {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.12), #020203);
+      box-shadow: var(--shadow-soft);
+      max-height: 420px;
+    }
+
+    .feature-media-main img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 1300ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms ease-out;
+      filter: saturate(1.12) contrast(1.1);
+    }
+
+    .feature-media-main:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.35) contrast(1.25);
+    }
+
+    .feature-overlay {
+      position: absolute;
+      inset: auto 10px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .feature-pill {
+      border-radius: var(--radius-pill);
+      padding: 4px 9px;
+      background: rgba(0,0,0,0.76);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(18px);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .feature-stat {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.35), rgba(8,8,12,0.98));
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #130f08;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ---------- REELS ---------- */
+
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .reel-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #050507;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transform-origin: center;
+      transition: transform 340ms var(--transition-med), box-shadow 340ms var(--transition-med), border-color 260ms ease-out;
+    }
+
+    .reel-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.03);
+      transition: transform 900ms cubic-bezier(0.19, 1, 0.22, 1), filter 260ms ease-out;
+      filter: saturate(1.15) contrast(1.1);
+    }
+
+    .reel-card:hover {
+      transform: translate3d(0, -5px, 0) scale(1.01);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(245,193,92,0.7);
+    }
+
+    .reel-card:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.35) contrast(1.3);
+    }
+
+    .reel-play {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: rgba(3,3,4,0.82);
+      border: 1px solid rgba(255,255,255,0.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5f5f6;
+      font-size: 14px;
+      backdrop-filter: blur(18px);
+    }
+
+    .reel-badge {
+      position: absolute;
+      left: 9px;
+      top: 9px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.82);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .reel-meta {
+      position: absolute;
+      left: 9px;
+      bottom: 9px;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(0,0,0,0.82);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .reel-card:last-child {
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.15), #020203);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      gap: 8px;
+      flex-direction: column;
+    }
+
+    .reel-card:last-child img {
+      display: none;
+    }
+
+    .reel-card:last-child .reel-play {
+      position: static;
+      margin: 0;
+    }
+
+    .reel-card:last-child .reel-meta {
+      position: static;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .reel-more-title {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .reel-more-text {
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 220px;
+    }
+
+    @media (max-width: 900px) {
+      .reel-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .reel-card:nth-child(2) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .reel-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .reel-card:nth-child(3) {
+        display: none;
+      }
+    }
+
+    /* ---------- CONTACT ---------- */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      background: radial-gradient(circle at 0 0, rgba(245,193,92,0.15), rgba(3,3,4,0.98));
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      top: -110px;
+      right: -70px;
+      background: radial-gradient(circle, rgba(245,193,92,0.36) 0, transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: 0.6;
+    }
+
+    .contact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .contact-title {
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .contact-badge {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.86);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(16px);
+      white-space: nowrap;
+    }
+
+    .contact-copy {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      max-width: 460px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .field-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(8,8,12,0.96);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      resize: none;
+      transition: border-color 200ms ease-out, background 200ms ease-out, box-shadow 200ms ease-out;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(138,141,150,0.8);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(245,193,92,0.85);
+      background: rgba(10,10,16,1);
+      box-shadow: 0 0 0 1px rgba(245,193,92,0.45);
+    }
+
+    .contact-footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .contact-note {
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 260px;
+    }
+
+    .contact-meta {
+      display: grid;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .contact-meta strong {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .contact-meta a {
+      color: var(--accent);
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+      padding: 22px 5vw 34px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      background: radial-gradient(circle at top, #080810, #020203);
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-left span {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .footer-right a {
+      color: var(--muted);
+    }
+
+    /* ---------- Scroll Reveal ---------- */
+
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0);
+      transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1), transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .reveal.reveal-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ---------- Keyframes ---------- */
+
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translate3d(0, 24px, 0) scale(0.98); }
+      to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    @keyframes hero-float-in {
+      from { opacity: 0; transform: translate3d(0, 60px, 0) scale(0.98); }
+      to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    @keyframes gallery-rise {
+      from { opacity: 0; transform: translate3d(0, 40px, 0); }
+      to   { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="top">
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="brand-mark">
+          <img src="logo.jpg" alt="RD FILMS logo" />
+        </div>
+        <div class="nav-title">
+          <span>Automotive Imagery</span>
+          <span>RD FILMS</span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#portfolio">Portfolio</a>
+        <a href="#experience">Experience</a>
+        <a href="#reels">Reels</a>
+        <a href="#contact">Book</a>
+      </div>
+
+      <div class="nav-cta">
+        <div class="nav-pill">
+          <div class="nav-pill-dot"></div>
+          <span>Kerala • India</span>
+        </div>
+        <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <span>Book a Shoot</span>
+          <div class="nav-btn-icon">↗</div>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+
+    <!-- HERO -->
+    <section class="hero" id="portfolio">
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <div class="hero-kicker-pill">RD FILMS</div>
+          <span>Cars shot like haute couture.</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span>Ultra-Luxury</span>
+          <span>Car Photography</span>
+        </h1>
+
+        <p class="hero-sub">
+          RD FILMS crafts cinematic automotive visuals for brands, collectors and private clients – where every reflection, curve and headlight is treated like **jewelry** on wheels.
+        </p>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Request full lookbook
+          </button>
+          <button class="btn-secondary" onclick="document.getElementById('reels').scrollIntoView({behavior:'smooth'})">
+            <span>▶</span>
+            Watch motion reel
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <span>Night shoots • Rain shots • Rolling rigs</span>
+          <span>Instagram-ready, brand-consistent visuals</span>
+        </div>
+
+        <div class="gallery-strip">
+          <div class="gallery-card">
+            <img src="8.jpg" alt="Mercedes G-Wagon front detail" />
+            <div class="gallery-label">Studio Noir</div>
+          </div>
+          <div class="gallery-card">
+            <img src="10.jpg" alt="Mercedes sedans in forest road" />
+            <div class="gallery-label">Forest Run</div>
+          </div>
+          <div class="gallery-card">
+            <img src="7.jpg" alt="Classic Mercedes wheel close-up" />
+            <div class="gallery-label">Heritage Detail</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-car-main">
+            <img src="6.jpg" alt="Night convoy on hills" />
+            <div class="hero-gradient-ring">
+              <div class="hero-ring-inner"></div>
+              <div class="hero-ring-core"></div>
+            </div>
+          </div>
+
+          <div class="hero-card-footer">
+            <div class="hero-card-text">Signature Night Convoy • RD Films</div>
+            <div class="hero-card-chip-row">
+              <div class="chip chip-gold">
+                <span class="chip-dot"></span>
+                High gloss edits
+              </div>
+              <div class="chip">
+                <span class="chip-dot"></span>
+                4K Reels
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <p class="section-heading reveal">Experience</p>
+      <h2 class="section-title reveal">Crafted For Premium Garages</h2>
+      <p class="section-sub reveal">
+        From AMG sedans to lifted trucks, RD FILMS builds a visual language around your machine – controlled lighting, minimalist color palettes and motion that feels effortlessly **expensive** on social media.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-list">
+          <div class="feature-item reveal">
+            <div class="feature-eyebrow">Signature angle curation</div>
+            <div class="feature-title">Obsessed with shapes & reflections</div>
+            <p class="feature-body">
+              Every frame is engineered to highlight body lines, wheel fitment and light trails while keeping the background clean, moody and on-brand for high-end garages and dealerships.
+            </p>
+            <div class="feature-tag-row">
+              <span class="feature-tag">Night-focused sets</span>
+              <span class="feature-tag">Matte & gloss friendly</span>
+            </div>
+          </div>
+
+          <div class="feature-item reveal">
+            <div class="feature-eyebrow">Instagram-native delivery</div>
+            <div class="feature-title">Reels that feel like trailers</div>
+            <p class="feature-body">
+              Vertical edits, sound design ready, opening frames that hook in under one second and transitions tuned for looping on Instagram and TikTok, ready to drop on your feed.
+            </p>
+            <div class="feature-tag-row">
+              <span class="feature-tag">9:16 mastered</span>
+              <span class="feature-tag">Trend-aware cuts</span>
+            </div>
+          </div>
+
+          <div class="feature-item reveal">
+            <div class="feature-eyebrow">Premium client workflow</div>
+            <div class="feature-title">White-glove production</div>
+            <p class="feature-body">
+              Location scouting, moodboards, shot lists and delivery timelines tailored for brands that need consistent, luxurious output without the chaos of a typical shoot day.
+            </p>
+            <div class="feature-tag-row">
+              <span class="feature-tag">Location scouting</span>
+              <span class="feature-tag">Color-managed export</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-media reveal">
+          <div class="feature-media-main">
+            <img src="3.jpg" alt="Dodge Charger night shot" />
+            <div class="feature-overlay">
+              <div class="feature-pill">Night-drive series • RD Films</div>
+              <div class="feature-stat">Delivered in 48 hours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REELS -->
+    <section id="reels">
+      <p class="section-heading reveal">Motion</p>
+      <h2 class="section-title reveal">Reels That Stop Scrolling</h2>
+      <p class="section-sub reveal">
+        High-contrast night sequences, rolling shots through forests and tight detail cuts designed to make your audience feel like they’re riding shotgun with the engine **idling** right beside them.
+      </p>
+
+      <div class="reel-grid">
+        <div class="reel-card reveal" onclick="openInstagram()">
+          <img src="9.jpg" alt="Ford truck on muddy trail" />
+          <div class="reel-badge">Off-road series</div>
+          <div class="reel-play">▶</div>
+          <div class="reel-meta">Tap to view reel</div>
+        </div>
+
+        <div class="reel-card reveal" onclick="openInstagram()">
+          <img src="10.jpg" alt="Mercedes sedans rolling through forest" />
+          <div class="reel-badge">Dual car run</div>
+          <div class="reel-play">▶</div>
+          <div class="reel-meta">Featured on IG</div>
+        </div>
+
+        <div class="reel-card reveal" onclick="openInstagram()">
+          <div class="reel-play">↗</div>
+          <div class="reel-meta">
+            <div class="reel-more-title">Explore RD FILMS</div>
+            <p class="reel-more-text">
+              Step into the full gallery of reels, stills and behind-the-scenes from recent night drives and forest runs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-heading reveal">Booking</p>
+      <h2 class="section-title reveal">Reserve Your Shoot</h2>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal">
+          <div class="contact-header">
+            <div class="contact-title">Private & Brand Sessions</div>
+            <div class="contact-badge">Limited dates each month</div>
+          </div>
+          <p class="contact-copy">
+            Share a few details about your car, preferred vibe and location. RD FILMS will respond with concepts, available dates and a custom quote tailored to your garage or brand.
+          </p>
+
+          <form class="contact-form">
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="instagram">Instagram handle</label>
+                <input id="instagram" placeholder="@rd._films" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="car">Car / fleet</label>
+                <input id="car" placeholder="Model, year, color" />
+              </div>
+              <div class="field">
+                <label for="location">Preferred location</label>
+                <input id="location" placeholder="City / type of location" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Concept & notes</label>
+              <textarea id="message" rows="3" placeholder="Night city, forest trail, static studio – tell us the mood."></textarea>
+            </div>
+
+            <div class="contact-footer-row">
+              <button type="button" class="btn-primary">
+                Submit request
+              </button>
+              <p class="contact-note">
+                You’ll receive a response within 24 hours with moodboards, shoot structure and pricing.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-meta reveal">
+          <div>
+            <strong>Direct booking.</strong><br />
+            DM on Instagram: <a href="https://instagram.com/rd._films" target="_blank">@rd._films</a>
+          </div>
+          <div>
+            <strong>Locations.</strong><br />
+            Based in Kerala, available for select shoots pan-India and internationally.
+          </div>
+          <div>
+            <strong>Deliverables.</strong><br />
+            Curated stills, vertical reels, behind-the-scenes content and social-ready cover frames.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="brand-mark" style="width:30px;height:30px;">
+          <img src="logo.jpg" alt="RD FILMS logo small" />
+        </div>
+        <span>RD FILMS • AUTOMOTIVE PHOTOGRAPHY</span>
+      </div>
+      <div class="footer-right">
+        <a href="#top">Back to top</a>
+        <a href="https://instagram.com/rd._films" target="_blank">Instagram</a>
+        <span>© <span id="year"></span> RD FILMS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Soft vignette background -->
+  <div style="
+    pointer-events:none;
+    position:fixed;
+    inset:-40px;
+    background:
+      radial-gradient(circle at 50% 20%, transparent 0, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.9) 100%);
+    mix-blend-mode:multiply;
+    z-index:-1;
+  "></div>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+    reveals.forEach(el => observer.observe(el));
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Instagram link – replace with your handle
+    function openInstagram() {
+      window.open('https://instagram.com/rd._films', '_blank');
+    }
+  </script>
+</body>
+</html>
